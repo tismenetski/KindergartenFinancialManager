@@ -37,9 +37,11 @@ export const addSalary = (FormData) => async (dispatch) => {
 };
 
 //GET salary by ID
-export const getSalary = (id) => async (dispatch) => {
+export const getSalary = (workerId, salaryId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/salaries/${id}`);
+    const res = await axios.get(
+      `/api/workers/${workerId}/salaries/${salaryId}`
+    );
 
     dispatch({
       type: GET_SALARY,
@@ -57,8 +59,16 @@ export const getSalary = (id) => async (dispatch) => {
 };
 
 export const getSalaries = () => async (dispatch) => {
+  let auth = localStorage.getItem('token');
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.token}`,
+    },
+  };
   try {
-    const res = await axios.get('/api/salaries');
+    const res = await axios.get('/api/salaries', config);
 
     dispatch({
       type: GET_SALARIES,
@@ -67,25 +77,31 @@ export const getSalaries = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SALARY_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };
 
-export const deleteSalary = (id) => async (dispatch) => {
+export const deleteSalary = (workerId, salaryId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/salaries/${id}`);
+    await axios.delete(`/api/workers/${workerId}/salaries/${salaryId}`);
 
     dispatch({
       type: DELETE_SALARY,
-      payload: id,
+      payload: salaryId,
     });
 
     dispatch(setAlert('Post Removed', 'success'));
   } catch (error) {
     dispatch({
       type: SALARY_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
     });
   }
 };

@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
+const morgan = require('morgan'); // 3rd party Middleware logger
 
 //Connect Database
 connectDB();
@@ -13,7 +14,7 @@ connectDB();
 dotenv.config({ path: './config/config.env' });
 
 //Init Middleware
-app.use(express.json(/*{ extended: false }*/)); //This option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true). The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded.
+app.use(express.json({ extended: false })); //This option allows to choose between parsing the URL-encoded data with the querystring library (when false) or the qs library (when true). The “extended” syntax allows for rich objects and arrays to be encoded into the URL-encoded format, allowing for a JSON-like experience with URL-encoded.
 
 //Cookie parser
 app.use(cookieParser());
@@ -28,14 +29,18 @@ const auth = require('./routes/api/auth');
 const workers = require('./routes/api/workers');
 const children = require('./routes/api/children');
 const payments = require('./routes/api/payments');
-
+const salaries = require('./routes/api/salaries');
 //Mount routers
 app.use('/api/auth', auth);
 app.use('/api/workers', workers);
 app.use('/api/children', children);
 app.use('/api/payments', payments);
-
+app.use('/api/salaries', salaries);
 app.use(errorHandler); //Declaring app.use errorhandler is required after announcing use of api since it won't work if we declare it before the api
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 const PORT = process.env.PORT || 5000;
 

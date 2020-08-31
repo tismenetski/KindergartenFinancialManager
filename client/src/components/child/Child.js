@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Income = (props) => {
+const Child = (props) => {
   return <div></div>;
 };
 
-Income.propTypes = {};
+Child.propTypes = {};
 
-export default Income;
+export default Child;

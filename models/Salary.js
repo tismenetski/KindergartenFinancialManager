@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 const SalarySchema = new mongoose.Schema({
   worker: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: 'Worker',
     required: true,
   },
   date: {
     type: Date,
     required: true,
+    //unique : true //To keep one salary per month
   },
   hours: {
     type: Number,

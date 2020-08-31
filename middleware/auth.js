@@ -6,25 +6,6 @@ const asyncHandler = require('./async');
 const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/User');
 
-// module.exports = function (req, res, next) {
-//   //Get token from the header of incoming request
-//   const token = req.header('x-auth-token');
-
-//   //Check if no token available
-//   if (!token) {
-//     return res.status(401).json({ msg: 'No token , Authorization denied' }); //Not Authorized
-//   }
-
-//   //Verify the token
-//   try {
-//     const decoded = jwt.verify(token, config.get('jwtSecret'));
-//     req.user = decoded.user; //assign the request user the user that extracted from the token
-//     next();
-//   } catch (error) {
-//     res.status(401).json({ msg: 'Token is not valid' }); // if we have a token but it's not valid
-//   }
-// };
-
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -40,7 +21,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
   // }
 
   //Make sure token exists
-
   if (!token) {
     return next(new ErrorResponse('Not authorized to access this route', 401));
   }
@@ -48,8 +28,6 @@ exports.protect = asyncHandler(async (req, res, next) => {
   try {
     //Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    console.log(decoded);
 
     //assign the req.user the user value that we take from the database using decoded user id from the token
     req.user = await User.findById(decoded.id);

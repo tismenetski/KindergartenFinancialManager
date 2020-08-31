@@ -25,7 +25,10 @@ exports.register = asyncHandler(async (req, res, next) => {
 //@route POST /api/auth/login
 //@access Public
 exports.login = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
+  console.log(email);
+  //console.log(password);
 
   //Validate email and password
 
@@ -60,6 +63,16 @@ exports.logout = asyncHandler(async (req, res, next) => {
   });
 
   res.status(200).json({ success: true, data: {} });
+});
+
+//@desc Get current logged in user
+//@route GET /api/auth/me
+//@access Private
+exports.getMe = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  //const user = req.user;
+
+  res.status(200).json(user);
 });
 
 // Get token from model, create cookie and send response -> this function replaces repetitive code in both register and login functions

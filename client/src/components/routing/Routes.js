@@ -5,6 +5,7 @@ import Register from '../auth/Register';
 import Alert from '../layout/Alert';
 import PrivateRoute from '../routing/PrivateRoute';
 import Dashboard from '../dashboard/Dashboard';
+import Salaries from '../../components/salaries/Salaries';
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/salaries" component={Salaries} />
       </Switch>
     </section>
   );

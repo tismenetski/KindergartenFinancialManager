@@ -27,7 +27,7 @@ router
   .delete(protect, deleteWorker);
 router
   .route('/')
-  .get(protect, advancedResults(Worker), getWorkers)
+  .get(protect, advancedResults(Worker, 'salaries'), getWorkers)
   .post(protect, addWorker);
 
 module.exports = router;
