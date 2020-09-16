@@ -26,6 +26,7 @@ export const addSalary = (FormData) => async (dispatch) => {
 
     dispatch(setAlert('Salary Added', 'success'));
   } catch (error) {
+    console.error(error);
     dispatch({
       type: SALARY_ERROR,
       payload: {
@@ -59,8 +60,6 @@ export const getSalary = (workerId, salaryId) => async (dispatch) => {
 };
 
 export const getSalaries = () => async (dispatch) => {
-  let auth = localStorage.getItem('token');
-
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -69,12 +68,13 @@ export const getSalaries = () => async (dispatch) => {
   };
   try {
     const res = await axios.get('/api/salaries', config);
-
+    console.log(res.data.data);
     dispatch({
       type: GET_SALARIES,
-      payload: res.data,
+      payload: res.data.data,
     });
   } catch (error) {
+    console.error(error);
     dispatch({
       type: SALARY_ERROR,
       payload: {

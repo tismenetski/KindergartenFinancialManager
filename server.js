@@ -30,12 +30,14 @@ const workers = require('./routes/api/workers');
 const children = require('./routes/api/children');
 const payments = require('./routes/api/payments');
 const salaries = require('./routes/api/salaries');
+const expenses = require('./routes/api/expenses');
 //Mount routers
 app.use('/api/auth', auth);
 app.use('/api/workers', workers);
 app.use('/api/children', children);
 app.use('/api/payments', payments);
 app.use('/api/salaries', salaries);
+app.use('/api/expenses', expenses);
 app.use(errorHandler); //Declaring app.use errorhandler is required after announcing use of api since it won't work if we declare it before the api
 
 if (process.env.NODE_ENV === 'development') {

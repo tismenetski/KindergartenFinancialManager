@@ -14,7 +14,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/children">Children</Link>
       </li>
       <li>
-        <Link to="/finances">Finances</Link>
+        <Link to="/salaries">Salaries</Link>
+      </li>
+      <li>
+        <Link to="/expenses">Expenses</Link>
       </li>
       <li>
         <Link to="/dashboard">

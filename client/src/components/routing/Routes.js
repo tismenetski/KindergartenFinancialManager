@@ -6,6 +6,8 @@ import Alert from '../layout/Alert';
 import PrivateRoute from '../routing/PrivateRoute';
 import Dashboard from '../dashboard/Dashboard';
 import Salaries from '../../components/salaries/Salaries';
+import Expenses from '../../components/expenses/Expenses';
+import Workers from '../../components/workers/Workers';
 
 const Routes = () => {
   return (
@@ -17,6 +19,8 @@ const Routes = () => {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/salaries" component={Salaries} />
+        <PrivateRoute exact path="/expenses" component={Expenses} />
+        <PrivateRoute exact path="/workers" component={Workers} />
       </Switch>
     </section>
   );

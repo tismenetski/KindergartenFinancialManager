@@ -7,10 +7,15 @@ const WorkerSchema = new mongoose.Schema(
       required: [true, 'Please enter worker name'],
       minlength: 3,
     },
-    age: { type: Number, required: [true, 'Please enter the worker age'] },
+    age: {
+      type: Number,
+      required: [true, 'Please enter the worker age'],
+      min: 16,
+    },
     hourPaymentRate: {
       type: Number,
       required: [true, 'Please enter hour payment rate'],
+      min: 30,
     },
     birthday: {
       type: Date,
@@ -23,6 +28,11 @@ const WorkerSchema = new mongoose.Schema(
       type: Date,
       default: Date.now() + 60 * 60 * 24 * 365 * 50 * 1000,
     },
+
+    //Build a trigger on mongodb atlas that will check if time between today and startWorkingDate is beyond one year
+    // regularWorkingConstrains:{
+
+    // }
     // salaries: [
     //   {
     //     salary: {

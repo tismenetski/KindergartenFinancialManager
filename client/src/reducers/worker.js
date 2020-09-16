@@ -1,14 +1,15 @@
 import {
-  ADD_SALARY,
-  DELETE_SALARY,
-  GET_SALARIES,
-  GET_SALARY,
-  SALARY_ERROR,
+  GET_WORKER,
+  GET_WORKERS,
+  ADD_WORKER,
+  DELETE_WORKER,
+  UPDATE_WORKER,
+  WORKER_ERROR,
 } from '../actions/types';
 
 const initialState = {
-  salaries: [],
-  salary: null,
+  workers: [],
+  worker: null,
   loading: true,
   error: {},
 };
@@ -17,33 +18,33 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case ADD_SALARY:
+    case ADD_WORKER:
       return {
         ...state,
-        salaries: [payload, ...state.salaries],
+        workers: [payload, ...state.workers],
         loading: false,
       };
-    case GET_SALARY:
+    case GET_WORKER:
       return {
         ...state,
-        salary: payload,
+        worker: payload,
         loading: false,
       };
-    case GET_SALARIES:
+    case GET_WORKERS:
       //console.log(payload);
       return {
         ...state,
-        salaries: payload,
+        workers: payload,
         loading: false,
       };
-    case DELETE_SALARY:
+    case DELETE_WORKER:
       return {
         ...state,
-        salaries: state.salaries.filter((salary) => salary._id !== payload),
+        workers: state.workers.filter((worker) => worker._id !== payload),
         loading: false,
       };
 
-    case SALARY_ERROR:
+    case WORKER_ERROR:
       console.log(payload);
       return {
         ...state,

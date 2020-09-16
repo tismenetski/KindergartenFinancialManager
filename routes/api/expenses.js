@@ -22,3 +22,5 @@ router
   .get(protect, getExpense)
   .put(updateExpense)
   .delete(deleteExpense);
+
+module.exports = router;
